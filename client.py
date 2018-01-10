@@ -6,7 +6,8 @@ from socket import *
 import json
 import time
 
-def createParser ():
+
+def create_parser():
     parser = argparse.ArgumentParser()
     parser.add_argument('addr', help='Server ip address')
     parser.add_argument('port', nargs='?', type=int, help='Server port', default=7777)
@@ -14,8 +15,21 @@ def createParser ():
     return parser
 
 
+def to_json_ascii(argument):
+    result = json.dumps(argument)
+
+    return result.encode('ascii')
+
+
+def from_json_ascii(argument):
+
+    result = json.loads(argument.decode('ascii'))
+
+    return result
+
+
 if __name__ == '__main__':
-    parser = createParser()
+    parser = create_parser()
     arguments = parser.parse_args(sys.argv[1:])
 
     timestamp = int(time.time())
@@ -30,22 +44,12 @@ if __name__ == '__main__':
         }
     }
 
-    print("Try to connect:")
+    print("Connecting to server:")
     print("ip: {}".format(arguments.addr))
     print("port: {}".format(arguments.port))
     s = socket(AF_INET, SOCK_STREAM)  # Создать сокет TCP
     s.connect((arguments.addr, arguments.port))   # Соединиться с сервером
+    s.send(to_json_ascii(presence))
     tm = s.recv(1024)                # Принять не более 1024 байтов данных
     s.close()
-    print("Текущее время: %s" % tm.decode('ascii'))
-
-#     import socket
-
-# sock = socket.socket()
-# sock.connect(('localhost', 9090))
-# sock.send('hello, world!')
-
-# data = sock.recv(1024)
-# sock.close()
-
-# print data
+    print("Ответ от сервера: %s" % from_json_ascii(tm))
