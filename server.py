@@ -56,19 +56,20 @@ if __name__ == '__main__':
         print("result: %s" % data.decode('ascii'))
         request = from_json_ascii(data)
 
+        response = {
+            "response": "400",
+            "time": 0,
+            "error": "Неправильный запрос"
+        }
+
         if request['action'] == 'presence':
-            timestamp = int(time.time())
             response = {
                 "response": "200",
-                "time": timestamp,
+                "time": 0,
                 "alert": "OK"
             }
-            client.send(to_json_ascii(response))
-        else:
-            timestamp = int(time.time())
-            response = {
-                "response": "400",
-                "time": timestamp,
-                "error": "Неправильный запрос"
-            }
+
+        timestamp = int(time.time())
+        response['time'] = timestamp
+        client.send(to_json_ascii(response))
         client.close()
