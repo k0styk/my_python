@@ -3,6 +3,7 @@
 import sys
 import argparse
 from socket import *
+import json
 import time
 
 def createParser ():
@@ -29,10 +30,35 @@ if __name__ == '__main__':
     while True:
         client, addr = s.accept()     # Принять запрос на соединение
         print("Получен запрос на соединение от %s" % str(addr))
-        
+
         timestr = time.ctime(time.time()) + "\n"
         
         # Обратите внимание, дальнейшая работа ведётся с сокетом клиента
         client.send(timestr.encode('ascii'))   # <- По сети должны передаваться байты,
                                                # поэтому выполняется кодирование строки 
         client.close()
+
+        # TODO do all responses
+        timestamp = int(time.time())
+        response = {
+            "response": "1xx / 2xx / 4xx / 5xx",
+            "time": timestamp,
+            "error": "error message (optional)"
+        }
+
+#         import socket
+
+# sock = socket.socket()
+# sock.bind(('', 9090))
+# sock.listen(1)
+# conn, addr = sock.accept()
+
+# print 'connected:', addr
+
+# while True:
+#     data = conn.recv(1024)
+#     if not data:
+#         break
+#     conn.send(data.upper())
+
+# conn.close()
