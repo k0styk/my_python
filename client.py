@@ -3,6 +3,8 @@
 import sys
 import argparse
 from socket import *
+import json
+import time
 
 def createParser ():
     parser = argparse.ArgumentParser()
@@ -15,6 +17,18 @@ def createParser ():
 if __name__ == '__main__':
     parser = createParser()
     arguments = parser.parse_args(sys.argv[1:])
+
+    timestamp = int(time.time())
+
+    presence = {
+        "action": "presence",
+        "time": timestamp,
+        "type": "status",
+        "user": {
+            "account_name": "user1",
+            "status": "Yep, I am here!"
+        }
+    }
 
     print("Try to connect:")
     print("ip: {}".format(arguments.addr))
