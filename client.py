@@ -38,3 +38,14 @@ if __name__ == '__main__':
     tm = s.recv(1024)                # Принять не более 1024 байтов данных
     s.close()
     print("Текущее время: %s" % tm.decode('ascii'))
+
+#     import socket
+
+# sock = socket.socket()
+# sock.connect(('localhost', 9090))
+# sock.send('hello, world!')
+
+# data = sock.recv(1024)
+# sock.close()
+
+# print data
