@@ -47,9 +47,9 @@ if __name__ == '__main__':
     print("Connecting to server:")
     print("ip: {}".format(arguments.addr))
     print("port: {}".format(arguments.port))
-    s = socket(AF_INET, SOCK_STREAM)  # Создать сокет TCP
-    s.connect((arguments.addr, arguments.port))   # Соединиться с сервером
+    s = socket(AF_INET, SOCK_STREAM)
+    s.connect((arguments.addr, arguments.port))
     s.send(to_json_ascii(presence))
-    tm = s.recv(1024)                # Принять не более 1024 байтов данных
+    tm = s.recv(1024)
     s.close()
     print("Ответ от сервера: %s" % from_json_ascii(tm))

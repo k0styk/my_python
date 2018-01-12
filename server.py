@@ -14,7 +14,8 @@ response = {
 }
 '''
 
-def createParser ():
+
+def create_parser():
     parser = argparse.ArgumentParser()
     parser.add_argument('-a', '--addr', nargs='?', help='Server ip listening', default='')
     parser.add_argument('-p', '--port', nargs='?', type=int, help='Server port', default=7777)
@@ -36,7 +37,7 @@ def from_json_ascii(argument):
 
 
 if __name__ == '__main__':
-    parser = createParser()
+    parser = create_parser()
     arguments = parser.parse_args(sys.argv[1:])
 
     print("Server running on:")
