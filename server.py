@@ -14,6 +14,7 @@ response = {
 }
 '''
 
+
 def createParser ():
     parser = argparse.ArgumentParser()
     parser.add_argument('-a', '--addr', nargs='?', help='Server ip listening', default='')
