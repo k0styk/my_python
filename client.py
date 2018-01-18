@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # Программа клиента, запрашивающего текущее время
 
 import sys
@@ -17,14 +18,11 @@ def create_parser():
 
 def to_json_ascii(argument):
     result = json.dumps(argument)
-
     return result.encode('ascii')
 
 
 def from_json_ascii(argument):
-
     result = json.loads(argument.decode('ascii'))
-
     return result
 
 
